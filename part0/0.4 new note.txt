@@ -1,0 +1,48 @@
+Create a similar diagram depicting the situation where the user 
+creates a new note on page 
+https://fullstack-exampleapp.herokuapp.com/notes by writing 
+something into the text field and clicking the submit button.
+
+browser: HTTP-request GET
+https://fullstack-exampleapp.herokuapp.com/notes
+server: status code 200 OK, notes.html
+browser: HTTP-request GET
+https://fullstack-exampleapp.herokuapp.com/main.css
+server: status code 200 OK, main.css
+browser: HTTP-request GET
+https://fullstack-exampleapp.herokuapp.com/main.js
+server: status code 200 OK, main.js
+
+browser executes main.js
+
+browser: HTTP-request GET
+https://fullstack-exampleapp.herokuapp.com/data.json
+server: status code 200 OK, data.json
+
+JavaScript code downloads JSON-data with notes and forms a 
+bullet-point list from the note contents.
+
+console.log prints the data to the console.
+
+browser displays a page
+
+browser: HTTP-request POST
+https://fullstack-exampleapp.herokuapp.com/new_note
+server: status code 302 Found, new_note.html
+
+browser: HTTP-request GET
+https://fullstack-exampleapp.herokuapp.com/notes
+server: status code 200 OK, notes.html
+browser: HTTP-request GET
+https://fullstack-exampleapp.herokuapp.com/main.css
+server: status code OK, main.css
+browser: HTTP-request GET
+https://fullstack-exampleapp.herokuapp.com/main.js
+server: status code 200 OK, main.js
+browser: HTTP-request GET
+https://fullstack-exampleapp.herokuapp.com/data.json
+server: status code 200 OK, data.json
+
+browser displays a page with a new note
+
+
