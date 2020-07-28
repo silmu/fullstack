@@ -1,3 +1,5 @@
+//LOADING A PAGE:
+
 browser: HTTP-request GET
 https://fullstack-exampleapp.herokuapp.com/notes
 server: status code 200 OK, notes.html
@@ -19,9 +21,45 @@ to the page using the DOM-API
 
 console.log prints the data to the console.
 
+//ADDING A NEW NOTE:
+
 browser: HTTP-request POST
 https://fullstack-exampleapp.herokuapp.com/new_note
 server: status code 302 Found, new_note.html
+
+302 status code indicates that resource requested has been
+temporarily moved to the URL given by the Location header :/notes
+
+Form Data shows the data sumbitted with the form:
+note: actual content
+
+Elements tab shows that the form tag has attributes action and method,
+which define that submitting the form is done as an HTTP POST request
+to the address new_note.
+    <form action="/new_note" method="POST">
+
+code on the server responsible for the POST request is run:
+
+    app.post('/new_note', (req, res) => {
+    notes.push({
+        content: req.body.note,
+        date: new Date(),
+    })
+
+    return res.redirect('/notes')
+    })
+
+Data is sent as the body of the POST-request.
+The server creates a new note object, and adds 
+it to an array called notes.
+
+    notes.push({
+    content: req.body.note, //actual content of the note
+    date: new Date(), //date and time
+    })
+
+
+//Browser reloads the Note page, causing three more HTTP requests:
 
 browser: HTTP-request GET
 https://fullstack-exampleapp.herokuapp.com/notes
