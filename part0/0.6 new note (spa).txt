@@ -1,0 +1,69 @@
+title Adding a New Note (SPA)
+
+browser->server: HTTP-request POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+note right of server: 
+status code 201 Created
+end note over
+server-->browser: new_note_spa.html
+
+note left of browser:
+The POST request to the address new_note_spa contains the new note
+as JSON-data containing both the content of the note and the date:
+
+    {
+      content: "spa test",
+      date: "2019-05-25T15:15:59.905Z"
+    }
+
+Content-type in Request Headers is application/json.
+
+end note over 
+note left of browser:
+JavaScriped fetched from the server is run:
+
+    var form = document.getElementById('notes_form')
+    form.onsubmit = function(e) {
+        e.preventDefault()
+
+        var note = {
+            content: e.target.elements[0].value,
+            date: new Date(),
+        }
+
+        notes.push(note)
+        e.target.elements[0].value = ''
+        redrawNotes()
+        sendToServer(note)
+    }
+
+The command document.getElementById('notes_form') instructs code to
+fetch the form-element from the page, and to register an event handler
+to handle the form submit event.
+
+The method e.preventDefault() is called immediately by the event handler
+to prevent the default handling of form submit.
+
+The command notes.push(note) is used by the event handler to create 
+a new note and to add it to the notes list.
+
+end note over 
+note left of browser:
+The code for sending the note:
+    var sendToServer = function(note) {
+        var xhttpForPost = new XMLHttpRequest()
+        // ...
+
+        xhttpForPost.open('POST', '/new_note_spa', true)
+        xhttpForPost.setRequestHeader(
+            'Content-type', 'application/json'
+        )
+        xhttpForPost.send(JSON.stringify(note))
+    }
+
+The code determines that the data is to be sent with an HTTP POST
+request and the data type is to be JSON. The data type is determined
+with a Content-type header. Then the data is sent as JSON-string.    
+end note over
+note left of browser:
+No further HTTP requests are sent.
+end note over 
