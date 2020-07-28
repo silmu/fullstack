@@ -1,8 +1,3 @@
-Create a similar diagram depicting the situation where the user 
-creates a new note on page 
-https://fullstack-exampleapp.herokuapp.com/notes by writing 
-something into the text field and clicking the submit button.
-
 browser: HTTP-request GET
 https://fullstack-exampleapp.herokuapp.com/notes
 server: status code 200 OK, notes.html
@@ -13,18 +8,16 @@ browser: HTTP-request GET
 https://fullstack-exampleapp.herokuapp.com/main.js
 server: status code 200 OK, main.js
 
-browser executes main.js
+browser executes main.js that requests JSON data from server
 
 browser: HTTP-request GET
 https://fullstack-exampleapp.herokuapp.com/data.json
 server: status code 200 OK, data.json
 
-JavaScript code downloads JSON-data with notes and forms a 
-bullet-point list from the note contents.
+browser executes an event handler, which renders the notes
+to the page using the DOM-API
 
 console.log prints the data to the console.
-
-browser displays a page
 
 browser: HTTP-request POST
 https://fullstack-exampleapp.herokuapp.com/new_note
