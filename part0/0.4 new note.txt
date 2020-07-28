@@ -1,32 +1,12 @@
-//LOADING A PAGE:
+title Adding a New Note
 
-browser: HTTP-request GET
-https://fullstack-exampleapp.herokuapp.com/notes
-server: status code 200 OK, notes.html
-browser: HTTP-request GET
-https://fullstack-exampleapp.herokuapp.com/main.css
-server: status code 200 OK, main.css
-browser: HTTP-request GET
-https://fullstack-exampleapp.herokuapp.com/main.js
-server: status code 200 OK, main.js
+browser->server: HTTP-request POST https://fullstack-exampleapp.herokuapp.com/new_note
+note right of server: 
+status code 302 Found
+end note over
+server-->browser: new_note.html
 
-browser executes main.js that requests JSON data from server
-
-browser: HTTP-request GET
-https://fullstack-exampleapp.herokuapp.com/data.json
-server: status code 200 OK, data.json
-
-browser executes an event handler, which renders the notes
-to the page using the DOM-API
-
-console.log prints the data to the console.
-
-//ADDING A NEW NOTE:
-
-browser: HTTP-request POST
-https://fullstack-exampleapp.herokuapp.com/new_note
-server: status code 302 Found, new_note.html
-
+note left of browser
 302 status code indicates that resource requested has been
 temporarily moved to the URL given by the Location header :/notes
 
@@ -36,9 +16,13 @@ note: actual content
 Elements tab shows that the form tag has attributes action and method,
 which define that submitting the form is done as an HTTP POST request
 to the address new_note.
-    <form action="/new_note" method="POST">
 
-code on the server responsible for the POST request is run:
+    <form action="/new_note" method="POST">
+    
+end note over 
+note left of browser
+
+Code on the server responsible for the POST request is run:
 
     app.post('/new_note', (req, res) => {
     notes.push({
@@ -48,7 +32,9 @@ code on the server responsible for the POST request is run:
 
     return res.redirect('/notes')
     })
-
+    
+end note over    
+note left of browser
 Data is sent as the body of the POST-request.
 The server creates a new note object, and adds 
 it to an array called notes.
@@ -57,23 +43,35 @@ it to an array called notes.
     content: req.body.note, //actual content of the note
     date: new Date(), //date and time
     })
+    
+   
+end note over 
+note left of browser
+Browser reloads the Note page, causing three more HTTP requests: 
+end note over 
 
+browser->server: HTTP-request GET https://fullstack-exampleapp.herokuapp.com/notes
+note right of server: 
+status code 200 OK
+end note over
+server-->browser: notes.html 
+browser->server: HTTP-request GET https://fullstack-exampleapp.herokuapp.com/main.css
+note right of server: 
+status code 200 OK
+end note over
+server-->browser: main.css
+browser->server: HTTP-request GET https://fullstack-exampleapp.herokuapp.com/main.js
+note right of server: 
+status code 200 OK
+end note over
+server-->browser: main.js
+browser->server: HTTP-request GET https://fullstack-exampleapp.herokuapp.com/data.json
+note right of server: 
+status code 200 OK
+end note over
+server-->browser:data.json
 
-//Browser reloads the Note page, causing three more HTTP requests:
-
-browser: HTTP-request GET
-https://fullstack-exampleapp.herokuapp.com/notes
-server: status code 200 OK, notes.html
-browser: HTTP-request GET
-https://fullstack-exampleapp.herokuapp.com/main.css
-server: status code OK, main.css
-browser: HTTP-request GET
-https://fullstack-exampleapp.herokuapp.com/main.js
-server: status code 200 OK, main.js
-browser: HTTP-request GET
-https://fullstack-exampleapp.herokuapp.com/data.json
-server: status code 200 OK, data.json
-
-browser displays a page with a new note
-
+note left of browser: 
+Browser displays a page with a new note
+end note over 
 
