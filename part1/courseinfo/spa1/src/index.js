@@ -1,6 +1,32 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+
+const Header = (props) => {
+  return (
+    <>
+    {props.course}
+    </>
+  )
+}
+
+const Content = (props) => {
+  return (
+    <>
+      {props.part1}
+      {props.part2}
+      {props.part3}
+    </>
+  )
+}
+const Total = (props) => {
+  return (
+    <>
+      <p>Number of exercises </p> {props.exercises1} + {props.exercises2} + {props.exercises3}
+    </>
+  )
+}
+
 const App = () => {
   const course = 'Half Stack application development'
   const part1 = 'Fundamentals of React'
@@ -12,19 +38,13 @@ const App = () => {
 
   return (
     <div>
-      <h1>{course}</h1>
-      <p>
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+      <Header course={course} />
+      <Content parts={parts} />
+      <Total parts={parts} />
+      
     </div>
   )
 }
+
 
 ReactDOM.render(<App />, document.getElementById('root'))
